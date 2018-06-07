@@ -75,15 +75,19 @@
    - [picture2](https://lh3.googleusercontent.com/lqOiOHwnsTwLGLlSnQncVnBbsZhTF_0OjKi-0MhuVyzBP44z54D6slBR2qQrM96stjNYcjKI61vPl0e81QpK=w1960-h3936-rw)
 
 ## Api End points
-  #### [localhost:5000/json](http://localhost:5000/json)
+  - [localhost:5000/json](http://localhost:5000/json)
 
 
     This will return all the companies details with its models
-  ####[local:5000/company/c_id/json](http://local:5000/company/1/json)
+    
+    
+  - [local:5000/company/c_id/json](http://local:5000/company/1/json)
 
 
-    This will return json data of company models
-  ####[local:5000/company/c_id/model/model_id/json](http://localhost:5000/company/4/model/3/json)
+     This will return json data of company models
+     
+     
+  - [local:5000/company/c_id/model/model_id/json](http://localhost:5000/company/4/model/3/json)
 
 
     This will return json data model data
