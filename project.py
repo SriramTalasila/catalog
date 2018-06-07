@@ -125,7 +125,6 @@ def gconnect():
     output += '!</h1>'
     print "done!"
     return output
-    
 
 # This is to logout the user
 
@@ -217,119 +216,159 @@ def showCompanyModels(c_id):
 
 @app.route('/company/new/', methods=['POST', 'GET'])
 def CreateCompany():
-    if request.method == 'POST':
-        session = DBSession()
-        newc = Company(name=request.form['cname'],
-                       user_id=login_session['user_id'])
-        session.add(newc)
-        session.commit()
-        session.close()
-        flash('New Company added')
-        return redirect('/')
+    if 'username' in login_session:
+        if request.method == 'POST':
+            session = DBSession()
+            newc = Company(name=request.form['cname'],
+                           user_id=login_session['user_id'])
+            session.add(newc)
+            session.commit()
+            session.close()
+            flash('New Company added')
+            return redirect('/')
+        else:
+            return render_template('addCompany.html', log_sess=login_session)
     else:
-        return render_template('addCompany.html', log_sess=login_session)
+        flash('login to proceed')
+        return redirect('/login')
 
 # This function is to create new model
 
 
 @app.route('/company/<int:c_id>/model/new', methods=['POST', 'GET'])
 def CreateModel(c_id):
-    if request.method == 'POST':
-        session = DBSession()
-        newModel = Models(name=request.form['Mname'],
-                          description=request.form['description'],
-                          price=request.form['mprice'],
-                          cc=request.form['cc'],
-                          image=request.form['mimage'],
-                          year=request.form['myear'],
-                          colors=request.form['mcolors'],
-                          company_id=c_id,
-                          user_id=login_session['user_id'])
-        session.add(newModel)
-        session.commit()
-        session.close()
-        flash('%s added' % request.form['Mname'])
-        return redirect(url_for('showCompanyModels', c_id=c_id))
+    session = DBSession()
+    company = session.query(Company).filter_by(id=c_id).one()
+    if 'username' in login_session:
+        if login_session['user_id'] == company.user_id:
+            if request.method == 'POST':
+                newModel = Models(name=request.form['Mname'],
+                                  description=request.form['description'],
+                                  price=request.form['mprice'],
+                                  cc=request.form['cc'],
+                                  image=request.form['mimage'],
+                                  year=request.form['myear'],
+                                  colors=request.form['mcolors'],
+                                  company_id=c_id,
+                                  user_id=login_session['user_id'])
+                session.add(newModel)
+                session.commit()
+                session.close()
+                flash('%s added' % request.form['Mname'])
+                return redirect(url_for('showCompanyModels', c_id=c_id))
+            else:
+                company = session.query(Company).filter_by(id=c_id).one()
+                session.close()
+                return render_template('addmodel.html',
+                                       comp=company,
+                                       log_sess=login_session)
+        else:
+            flash('You are not autherized for this operation')
+            return redirect('/')
     else:
-        session = DBSession()
-        company = session.query(Company).filter_by(id=c_id).one()
-        session.close()
-        return render_template('addmodel.html',
-                               comp=company, log_sess=login_session)
+        flash('login to proceed')
+        return redirect('/login')
 
 # this function is to edit company name
 
+
 @app.route('/company/<int:c_id>/edit', methods=['POST', 'GET'])
 def editCompany(c_id):
-    if request.method == 'POST':
-        session = DBSession()
-        getcomp = session.query(Company).filter_by(id=c_id).one()
-        getcomp.name = request.form['cname']
-        session.add(getcomp)
-        session.commit()
-        session.close()
-        flash('Company name modified')
-        return redirect('/')
+    session = DBSession()
+    company = session.query(Company).filter_by(id=c_id).one()
+    if 'username' in login_session:
+        if login_session['user_id'] == company.user_id:
+            if request.method == 'POST':
+                getcomp = session.query(Company).filter_by(id=c_id).one()
+                getcomp.name = request.form['cname']
+                session.add(getcomp)
+                session.commit()
+                session.close()
+                flash('Company name modified')
+                return redirect('/')
+            else:
+                company = session.query(Company).filter_by(id=c_id).one()
+                session.close()
+                return render_template('editCompany.html',
+                                       comp=company,
+                                       log_sess=login_session)
+        else:
+            flash('You are not autherized for this operation')
+            return redirect('/')
     else:
-        session = DBSession()
-        company = session.query(Company).filter_by(id=c_id).one()
-        session.close()
-        return render_template('editCompany.html',
-                               comp=company,
-                               log_sess=login_session)
+        flash('login to proceed')
+        return redirect('/login')
 
-# This function is to edit model 
+# This function is to edit model
 
 
 @app.route('/company/<int:c_id>/model/<int:model_id>/edit',
            methods=['POST', 'GET'])
 def editModel(c_id, model_id):
-    if request.method == 'POST':
-        session = DBSession()
-        model = session.query(Models).filter_by(id=model_id).one()
-        model.name = request.form['Mname']
-        model.year = request.form['myear']
-        model.price = request.form['mprice']
-        model.cc = request.form['cc']
-        model.image = request.form['mimage']
-        model.colors = request.form['mcolors']
-        model.description = request.form['description']
-        session.add(model)
-        session.commit()
-        session.close()
-        flash("Model edited")
-        return redirect(url_for('viewModel', c_id=c_id, model_id=model_id))
+    session = DBSession()
+    company = session.query(Company).filter_by(id=c_id).one()
+    if 'username' in login_session:
+        if login_session['user_id'] == company.user_id:
+            if request.method == 'POST':
+                model = session.query(Models).filter_by(id=model_id).one()
+                model.name = request.form['Mname']
+                model.year = request.form['myear']
+                model.price = request.form['mprice']
+                model.cc = request.form['cc']
+                model.image = request.form['mimage']
+                model.colors = request.form['mcolors']
+                model.description = request.form['description']
+                session.add(model)
+                session.commit()
+                session.close()
+                flash("Model edited")
+                return redirect(url_for('viewModel',
+                                        c_id=c_id,
+                                        model_id=model_id))
+            else:
+                model = session.query(Models).filter_by(id=model_id).one()
+                session.close()
+                return render_template('editModel.html',
+                                       model=model,
+                                       log_sess=login_session)
+        else:
+            flash('You are not autherized for this operation')
+            return redirect('/')
     else:
-        session = DBSession()
-        model = session.query(Models).filter_by(id=model_id).one()
-        session.close()
-        return render_template('editModel.html',
-                               model=model,
-                               log_sess=login_session)
+        flash('login to proceed')
+        return redirect('/login')
 
 # This function is to delete company
 
 
 @app.route('/company/<int:c_id>/delete', methods=['POST', 'GET'])
 def deleteCompany(c_id):
-    if request.method == 'POST':
-        session = DBSession()
-        company = session.query(Company).filter_by(id=c_id).one()
-        cmodels = session.query(Models).filter_by(company_id=company.id).all()
-        for cm in cmodels:
-            session.delete(cm)
-        session.delete(company)
-        session.commit()
-        flash('Company deleted')
-        session.close()
-        return redirect('/')
+    session = DBSession()
+    company = session.query(Company).filter_by(id=c_id).one()
+    if 'username' in login_session:
+        if login_session['user_id'] == company.user_id:
+            if request.method == 'POST':
+                company = session.query(Company).filter_by(id=c_id).one()
+                c = session.query(Models).filter_by(company_id=c_id).all()
+                for cm in c:
+                    session.delete(cm)
+                session.delete(company)
+                session.commit()
+                flash('Company deleted')
+                session.close()
+                return redirect('/')
+            else:
+                company = session.query(Company).filter_by(id=c_id).one()
+                session.close()
+                return render_template('CdeletePrompt.html',
+                                       comp=company,
+                                       log_sess=login_session)
+        else:
+            flash('You are not autherized for this operation')
+            return redirect('/')
     else:
-        session = DBSession()
-        company = session.query(Company).filter_by(id=c_id).one()
-        session.close()
-        return render_template('CdeletePrompt.html',
-                               comp=company,
-                               log_sess=login_session)
+        flash('login to proceed')
+        return redirect('/login')
 
 # This function is to delete model based on id
 
@@ -337,21 +376,31 @@ def deleteCompany(c_id):
 @app.route('/company/<int:c_id>/model/<int:model_id>/delete',
            methods=['POST', 'GET'])
 def deleteModel(c_id, model_id):
-    if request.method == 'POST':
-        session = DBSession()
-        model = session.query(Models).filter_by(id=model_id).one()
-        session.delete(model)
-        session.commit()
-        flash("Model deleted")
-        session.close()
-        return redirect(url_for('showCompanyModels', c_id=c_id))
+    session = DBSession()
+    company = session.query(Company).filter_by(id=c_id).one()
+    if 'username' in login_session:
+        if login_session['user_id'] == company.user_id:
+            if request.method == 'POST':
+                session = DBSession()
+                model = session.query(Models).filter_by(id=model_id).one()
+                session.delete(model)
+                session.commit()
+                flash("Model deleted")
+                session.close()
+                return redirect(url_for('showCompanyModels', c_id=c_id))
+            else:
+                session = DBSession()
+                model = session.query(Models).filter_by(id=model_id).one()
+                session.close()
+                return render_template('deleteModel.html',
+                                       model=model,
+                                       log_sess=login_session)
+        else:
+            flash('You are not autherized for this operation')
+            return redirect('/')
     else:
-        session = DBSession()
-        model = session.query(Models).filter_by(id=model_id).one()
-        session.close()
-        return render_template('deleteModel.html',
-                               model=model,
-                               log_sess=login_session)
+        flash('login to proceed')
+        return redirect('/login')
 
 # This function will renders the details of model
 
