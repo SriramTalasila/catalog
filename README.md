@@ -15,6 +15,8 @@
   - requests
   - Virtualenc
   
+
+  run pip install -r requirements.txt to install all dependencies.
   
 ## How to run server
   In order to run this server you need to install python(2.7) or higher in your machine(linux/windows).
@@ -52,6 +54,7 @@
   │   ├── showComModels.html
   │   └── viewModel.html
   ├── project.py
+  ├── requirements.txt
   └── README.md
   ```
   - client_secrets.json file contains oauth2 info.
@@ -59,6 +62,7 @@
   - carmodels.db is the sqllite database file
   - static folder contains the static files such as css,javascript,images etc.
   - templates folder contains the html files which is used to render data
+  - requirements.txt contains all the require modules
   - Project.py is the main file which contains all routes and logic
 ## Oauth 
   This application authenticates users using Google Oauth v2 api and stores user data in database.
@@ -75,6 +79,7 @@
    - [picture1](https://drive.google.com/file/d/1IzR7bv_VXnCZPzJ5Kx5g73mMK21P9qVx/view?usp=drivesdk)
    - [picture2](https://drive.google.com/file/d/1IzR7bv_VXnCZPzJ5Kx5g73mMK21P9qVx/view?usp=drivesdk)
 
+
 ## Api End points
   - [localhost:5000/json](http://localhost:5000/json)
 
@@ -89,6 +94,6 @@
 
 
   - [local:5000/company/c_id/model/model_id/json](http://localhost:5000/company/4/model/3/json)
-
+  
 
     This will return json data model data
