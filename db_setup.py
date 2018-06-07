@@ -5,6 +5,8 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+# User Class
+
 
 class User(Base):
     __tablename__ = 'user'
@@ -13,6 +15,8 @@ class User(Base):
     name = Column(String(250), nullable=False)
     email = Column(String(250), nullable=False)
     picture = Column(String(250))
+
+# Company Class 
 
 
 class Company(Base):
@@ -30,6 +34,8 @@ class Company(Base):
             'name': self.name,
             'id': self.id,
         }
+
+# Model Class
 
 
 class Models(Base):

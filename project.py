@@ -125,6 +125,7 @@ def gconnect():
     output += '!</h1>'
     print "done!"
     return output
+    
 
 # This is to logout the user
 
@@ -199,6 +200,8 @@ def ShowCompanies():
     return render_template('main.html', companies=companies,
                            log_sess=login_session, LModels=latestmodels)
 
+# This function is to view all models in a company
+
 
 @app.route('/company/<int:c_id>/')
 def showCompanyModels(c_id):
@@ -226,6 +229,8 @@ def CreateCompany():
     else:
         return render_template('addCompany.html', log_sess=login_session)
 
+# This function is to create new model
+
 
 @app.route('/company/<int:c_id>/model/new', methods=['POST', 'GET'])
 def CreateModel(c_id):
@@ -252,6 +257,7 @@ def CreateModel(c_id):
         return render_template('addmodel.html',
                                comp=company, log_sess=login_session)
 
+# this function is to edit company name
 
 @app.route('/company/<int:c_id>/edit', methods=['POST', 'GET'])
 def editCompany(c_id):
@@ -271,6 +277,8 @@ def editCompany(c_id):
         return render_template('editCompany.html',
                                comp=company,
                                log_sess=login_session)
+
+# This function is to edit model 
 
 
 @app.route('/company/<int:c_id>/model/<int:model_id>/edit',
@@ -299,6 +307,8 @@ def editModel(c_id, model_id):
                                model=model,
                                log_sess=login_session)
 
+# This function is to delete company
+
 
 @app.route('/company/<int:c_id>/delete', methods=['POST', 'GET'])
 def deleteCompany(c_id):
@@ -321,6 +331,8 @@ def deleteCompany(c_id):
                                comp=company,
                                log_sess=login_session)
 
+# This function is to delete model based on id
+
 
 @app.route('/company/<int:c_id>/model/<int:model_id>/delete',
            methods=['POST', 'GET'])
@@ -340,6 +352,8 @@ def deleteModel(c_id, model_id):
         return render_template('deleteModel.html',
                                model=model,
                                log_sess=login_session)
+
+# This function will renders the details of model
 
 
 @app.route('/company/<int:c_id>/model/<int:model_id>/')

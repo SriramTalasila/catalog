@@ -30,6 +30,7 @@
   $python project.py
   
   ```
+  After this if all goes well access your web application from [http://localhost:5000](http://localhost:5000)
 ## Files in this project
   ```
   catalog
@@ -79,14 +80,14 @@
 
 
     This will return all the companies details with its models
-    
-    
+
+
   - [local:5000/company/c_id/json](http://local:5000/company/1/json)
 
 
-     This will return json data of company models
-     
-     
+    This will return json data of company models
+
+
   - [local:5000/company/c_id/model/model_id/json](http://localhost:5000/company/4/model/3/json)
 
 
