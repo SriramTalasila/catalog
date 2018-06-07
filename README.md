@@ -72,8 +72,8 @@
   - Download the client_secret.json file and place it project directory
   
 ### webpage sample
-   - [picture1](https://lh4.googleusercontent.com/CCLYRLrtBhc96XYIZxc_up_9kfaI6uQfj1nqF4_rA61h3fBUXGLzWIIfporOFtWDX7EUMFYeWU8VZhtDVdzt=w1960-h3936-rw)
-   - [picture2](https://lh3.googleusercontent.com/lqOiOHwnsTwLGLlSnQncVnBbsZhTF_0OjKi-0MhuVyzBP44z54D6slBR2qQrM96stjNYcjKI61vPl0e81QpK=w1960-h3936-rw)
+   - [picture1](https://drive.google.com/file/d/1IzR7bv_VXnCZPzJ5Kx5g73mMK21P9qVx/view?usp=drivesdk)
+   - [picture2](https://drive.google.com/file/d/1IzR7bv_VXnCZPzJ5Kx5g73mMK21P9qVx/view?usp=drivesdk)
 
 ## Api End points
   - [localhost:5000/json](http://localhost:5000/json)
