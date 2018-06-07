@@ -9,6 +9,10 @@ Base = declarative_base()
 
 
 class User(Base):
+
+    '''
+        This class is to create user table in the database
+    '''
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
@@ -16,10 +20,13 @@ class User(Base):
     email = Column(String(250), nullable=False)
     picture = Column(String(250))
 
-# Company Class 
+# Company Class
 
 
 class Company(Base):
+    '''
+        This Class is to create table in sqlite database
+    '''
     __tablename__ = 'company'
 
     id = Column(Integer, primary_key=True)
@@ -39,6 +46,10 @@ class Company(Base):
 
 
 class Models(Base):
+    '''
+        This class is to create carmodels table it takes declarative
+        base object as parameter
+    '''
     __tablename__ = 'carmodels'
 
     name = Column(String(80), nullable=False)
