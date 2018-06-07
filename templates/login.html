@@ -17,11 +17,24 @@
 </head>
 
 <body>
+        
     <header class="w3-container w3-xlarge w3-padding-24">
         <a href="/" class="w3-left  w3-transparent ">Cars</a>
         <div class="w3-dropdown-hover w3-right">
     </header>
     <hr>
+    <div id="mess" class="w3-panel w3-green">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>
+                    <strong> {{ message }} </strong>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %} {% endwith %}
+        </div>
     <div id="result"></div>
     <!-- GOOGLE PLUS SIGN IN BUTTON-->
     <div id="signinButton">
