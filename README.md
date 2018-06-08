@@ -97,3 +97,7 @@
   
 
     This will return json data model data
+
+
+
+>The classes used for styling the pages are taken form [w3.csss](https://www.w3schools.com/w3css/).
