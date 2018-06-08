@@ -263,7 +263,7 @@ def CreateModel(c_id):
                                        comp=company,
                                        log_sess=login_session)
         else:
-            flash('You are not autherized for this operation')
+            flash('You are not autherized add model ')
             return redirect('/')
     else:
         flash('login to proceed')
@@ -293,7 +293,7 @@ def editCompany(c_id):
                                        comp=company,
                                        log_sess=login_session)
         else:
-            flash('You are not autherized for this operation')
+            flash('You are not autherized to edit company')
             return redirect('/')
     else:
         flash('login to proceed')
@@ -332,7 +332,7 @@ def editModel(c_id, model_id):
                                        model=model,
                                        log_sess=login_session)
         else:
-            flash('You are not autherized for this operation')
+            flash('You are not autherized to edit model')
             return redirect('/')
     else:
         flash('login to proceed')
@@ -364,7 +364,7 @@ def deleteCompany(c_id):
                                        comp=company,
                                        log_sess=login_session)
         else:
-            flash('You are not autherized for this operation')
+            flash('You are not autherized to delete')
             return redirect('/')
     else:
         flash('login to proceed')
@@ -396,7 +396,7 @@ def deleteModel(c_id, model_id):
                                        model=model,
                                        log_sess=login_session)
         else:
-            flash('You are not autherized for this operation')
+            flash('You are not autherized to delete model')
             return redirect('/')
     else:
         flash('login to proceed')
